@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrevista de Desligamento</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+      margin: 0;
+      padding: 20px;
+      color: #2f3e46;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header img.logo {
+      width: 20%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      margin: 10px 0;
+      font-size: 1.8em;
+      color: #023047;
+    }
+    header .descricao {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    h2, h3 {
+      color: #023047;
+    }
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
+    textarea, input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      resize: vertical;
+      font-family: 'Poppins', sans-serif;
+    }
+    .rating-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .rating-group label {
+      flex: 1 1 120px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 8px 5px;
+      background: #f1f5f9;
+      transition: background 0.3s;
+    }
+    .rating-group label:hover {
+      background: #e0f2fe;
+    }
+    .signature-wrapper, .assinatura {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+    .signature-pad {
+      width: 320px;
+      height: 120px;
+      border: 1.5px solid #ced4da;
+      border-radius: 8px;
+      touch-action: none;
+      margin: 0 auto 12px;
+      display: block;
+    }
+    .sig-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .sig-buttons button, .btn-print {
+      padding: 10px 20px;
+      background: #023047;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .sig-buttons button:hover, .btn-print:hover {
+      background: #03506f;
+    }
+    .print-info {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #555;
+      text-align: right;
+      display: none;
+    }
+    @media print {
+      .btn-print, .sig-buttons {
+        display: none !important;
+      }
+      .print-info {
+        display: block;
+      }
+    }
+    @media (max-width: 600px) {
+      .rating-group {
+        flex-direction: column;
+      }
+      header img.logo {
+        width: 40%;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <header>
+    <img src="logo.png" class="logo" alt="Logo da Empresa">
+    <h1>Entrevista de Desligamento</h1>
+    <p class="descricao">Sua participação é muito importante. Agradecemos sua colaboração respondendo ao questionário. Você poderá, com sua opinião, contribuir com sugestões, levantar aspectos positivos ou negativos de sua trajetória profissional, bem como auxiliar em processos de mudança da Empresa.</p>
+  </header>
+
+  <!-- Dados Profissionais -->
+  <section>
+    <h2>Dados Profissionais</h2>
+    <label>Nome do Funcionário</label>
+    <input type="text" id="nomeFuncionario">
+    <label>Área</label>
+    <input type="text">
+    <label>Cargo</label>
+    <input type="text">
+    <label>Gestor Imediato</label>
+    <input type="text">
+    <label>Data de Admissão</label>
+    <input type="date">
+    <label>Data de Saída</label>
+    <input type="date">
+    <p><label><input type="checkbox"> Opto por não realizar a entrevista de desligamento</label></p>
+    <div class="assinatura">
+          <p>Assinatura do Profissional</p>
+      <canvas id="sig1" class="signature-pad"></canvas>
+      <div class="sig-buttons">
+        <button type="button" id="clear1">Limpar</button>
+        <button type="button" id="save1">Salvar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motivos do Desligamento -->
+  <section>
+    <h2>Quanto ao seu desligamento</h2>
+    <label><input type="radio" name="desligamento"> Fui demitido e fui informado do motivo</label>
+    <textarea placeholder="Comentários..."></textarea>
+    <label><input type="radio" name="desligamento"> Fui demitido e não fui informado do motivo</label>
+    <textarea placeholder="Comentários..."></textarea>
+    <label><input type="radio" name="desligamento"> Solicitei minha demissão devido à proposta de outra empresa</label>
+    <textarea placeholder="Razão/Motivo...Se possível, mencionar área, segmento e empresa..."></textarea>
+    <label><input type="radio" name="desligamento"> Solicitei minha demissão por outros motivos</label>
+    <textarea placeholder="Razão/Motivo..."></textarea>
+  </section>
+
+  <!-- Avaliação de sua área -->
+  <section>
+    <h2>Avaliação de Sua Área</h2>
+   
+    <h3>Equipe</h3>
+    <label>Como você classifica sua equipe de trabalho com relação a relacionamento, cooperação, “clima”, etc?</label>
+       <div class="rating-group">
+      <label><input type="radio" name="equipe"><span>😃 Excelente</span></label>
+      <label><input type="radio" name="equipe"><span>🙂 Bom</span></label>
+      <label><input type="radio" name="equipe"><span>😐 Regular</span></label>
+      <label><input type="radio" name="equipe"><span>😟 Ruim</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre a equipe..."></textarea>
+
+    <h3>Liderança</h3>
+    <label>Como você classifica a liderança recebida (estilo de liderança; capacidade para gerenciar pessoas; habilidade para ensinar, motivar, valorizar, dar feedback, integrar pessoas, etc)?</label>
+    <div class="rating-group">
+      <label><input type="radio" name="lider"><span>😃 Excelente</span></label>
+      <label><input type="radio" name="lider"><span>🙂 Bom</span></label>
+      <label><input type="radio" name="lider"><span>😐 Regular</span></label>
+      <label><input type="radio" name="lider"><span>😟 Ruim</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre a liderança..."></textarea>
+  </section>
+
+  <!-- Avaliação Específica -->
+  <section>
+    <h2>Avaliação Específica</h2>
+   
+    <h3>Treinamento</h3>
+    <label>Os treinamentos oferecidos tiveram aplicabilidade no seu trabalho e desempenho de sua função?</label>
+    <div class="rating-group">
+      <label><input type="radio" name="treinamento"><span>✅ Integralmente</span></label>
+      <label><input type="radio" name="treinamento"><span>👍 A Maioria</span></label>
+      <label><input type="radio" name="treinamento"><span>🫱 Alguns</span></label>
+      <label><input type="radio" name="treinamento"><span>❌ Nenhum</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre treinamento..."></textarea>
+
+    <h3>Desenvolvimento Profissional</h3>
+    <label>Qual a sua opinião sobre seu desenvolvimento profissional (oportunidade, valorização, carreira, etc)</label>
+    <div class="rating-group">
+      <label><input type="radio" name="desenvolvimento"><span>😃 Excelente</span></label>
+      <label><input type="radio" name="desenvolvimento"><span>🙂 Bom</span></label>
+      <label><input type="radio" name="desenvolvimento"><span>😐 Regular</span></label>
+      <label><input type="radio" name="desenvolvimento"><span>😟 Ruim</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre desenvolvimento..."></textarea>
+
+    <h3>Benefícios</h3>
+    <label>Qual a sua opinião sobre os benefícios oferecidos pela empresa?</label>
+    <div class="rating-group">
+      <label><input type="radio" name="beneficios"><span>😃 Excelente</span></label>
+      <label><input type="radio" name="beneficios"><span>🙂 Bom</span></label>
+      <label><input type="radio" name="beneficios"><span>😐 Regular</span></label>
+      <label><input type="radio" name="beneficios"><span>😟 Ruim</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre benefícios..."></textarea>
+
+    <h3>Comunicação</h3>
+    <label>Com relação à comunicação interna da empresa?</label>
+    <div class="rating-group">
+      <label><input type="radio" name="comunicacao"><span>😃 Excelente</span></label>
+      <label><input type="radio" name="comunicacao"><span>🙂 Bom</span></label>
+      <label><input type="radio" name="comunicacao"><span>😐 Regular</span></label>
+      <label><input type="radio" name="comunicacao"><span>😟 Ruim</span></label>
+    </div>
+    <textarea placeholder="Comentários sobre comunicação..."></textarea>
+  </section>
+
+  <!-- Avaliação Geral -->
+  <section>
+    <h2>Avaliação Geral sobre a Empresa</h2>
+    <label>🙂 Aspectos Positivos</label>
+    <textarea></textarea>
+    <label>🙁 Pontos a melhorar / Sugestões</label>
+    <textarea></textarea>
+    <label>Você gostaria de comentar algo que não foi perguntado?</label>
+    <textarea></textarea>
+    <label>Data</label>
+    <input type="date">
+    <div class="assinatura">
+      <p>Assinatura do Entrevistado</p>
+      <canvas id="sig2" class="signature-pad"></canvas>
+      <div class="sig-buttons">
+        <button type="button" id="clear2">Limpar</button>
+        <button type="button" id="save2">Salvar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comentários do Entrevistador -->
+  <section>
+    <h2>Comentários do Entrevistador</h2>
+    <textarea></textarea>
+    <label>Data</label>
+    <input type="date">
+    <div class="assinatura">
+      <p>Assinatura do Entrevistador</p>
+      <canvas id="sig3" class="signature-pad"></canvas>
+      <div class="sig-buttons">
+        <button type="button" id="clear3">Limpar</button>
+        <button type="button" id="save3">Salvar</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="print-info" id="printInfo"></div>
+  <button class="btn-print" onclick="prepareAndPrint()">🖨️ Imprimir PDF</button>
+</div>
+
+<script>
+  function initPad(canvasId, clearId, saveId) {
+    const canvas = document.getElementById(canvasId);
+    if (canvas) {
+      const pad = new SignaturePad(canvas, {
+        penColor: '#023047',
+        minWidth: 1.5,
+        maxWidth: 3,
+        velocityFilterWeight: 0.7
+      });
+      document.getElementById(clearId).onclick = () => { pad.clear(); pad.on(); };
+      document.getElementById(saveId).onclick = () => {
+        if (pad.isEmpty()) return alert('Assine primeiro!');
+        pad.off();
+        alert('Assinatura salva!');
+      };
+    }
+  }
+
+  initPad('sig1', 'clear1', 'save1');
+  initPad('sig2', 'clear2', 'save2');
+  initPad('sig3', 'clear3', 'save3');
+
+  function prepareAndPrint() {
+    const nome = document.getElementById('nomeFuncionario')?.value || "Funcionário não identificado";
+    const agora = new Date();
+    const dataHora = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR');
+    document.getElementById('printInfo').innerText = `Documento impresso por: ${nome} | Data e hora da impressão: ${dataHora}`;
+    setTimeout(() => window.print(), 100);
+  }
+</script>
+</body>
+</html>
